@@ -37,3 +37,12 @@ export interface MarvelComicSummary {
   resourceURI: string;
   name: string;
 }
+export type CartType = {
+  id: number;
+  name: string;
+  description: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+};
