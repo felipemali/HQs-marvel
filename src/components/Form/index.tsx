@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { MarvelAPIResponse } from "../../models/Characters";
-import { SearchForm, SearchInput, SearchButton, ResetButton } from "./styles";
+import { SearchForm, SearchInput } from "./styles";
 import { marvelCharacters } from "../../api/characters";
-
+import { Button } from "../Button";
 
 type FormProps = {
   characters: MarvelAPIResponse | undefined;
@@ -46,8 +46,8 @@ export const Form = ({ characters, setCharacters }: FormProps) => {
         placeholder="Digite o nome de uma HQ"
       />
       <div>
-        <SearchButton type="submit">Buscar</SearchButton>
-        <ResetButton type="reset">Limpar</ResetButton>
+        <Button type="submit">Buscar</Button>
+        <Button type="reset">Limpar</Button>
       </div>
     </SearchForm>
   );
