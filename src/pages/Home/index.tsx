@@ -1,6 +1,8 @@
-import Characters from "../../components/Character";
+import Characters from "./components/Character";
 import { Form } from "../../components/Form";
 import { marvelCharacters } from "../../api/characters";
+import { useEffect, useState } from "react";
+import { MarvelAPIResponse } from "../../models/Characters";
 
 export type setFiltersProps = {
   orderBy: string;
@@ -8,11 +10,18 @@ export type setFiltersProps = {
 };
 
 const Home = () => {
-  console.log(marvelCharacters);
+  const [characters, setCharacters] = useState<MarvelAPIResponse | undefined>();
+
+  useEffect(() => {
+    if (characters === undefined) {
+      setCharacters(marvelCharacters);
+    }
+    console.log("marvelCharacters", marvelCharacters);
+  }, []);
   return (
     <>
-      <Form />
-      <Characters characters={marvelCharacters} />
+      <Form setCharacters={setCharacters} characters={characters} />
+      <Characters characters={characters} />
     </>
   );
 };
