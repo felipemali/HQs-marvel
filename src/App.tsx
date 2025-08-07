@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import routes from "./routes";
 import axios from "axios";
+import { Footer } from "./components/Footer";
 
 const App = () => {
   // useEffect(() => {
@@ -18,7 +19,12 @@ const App = () => {
 
   const elements = useRoutes(routes);
 
-  return <>{elements}</>;
+  return (
+    <>
+      {elements}
+      <Footer />
+    </>
+  );
 };
 
 export default App;
