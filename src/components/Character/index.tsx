@@ -11,11 +11,11 @@ export default function Characters({ characters }: CharactersProps) {
     <CharactersContainer>
       {characters.data.results.map((character, index) => (
         <CharacterCard
-          key={index}
+          key={character.id}
           className="characterCard"
           style={{
             background: `url(${character.thumbnail.path}) no-repeat center`,
-            backgroundSize: "contain",
+            backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
