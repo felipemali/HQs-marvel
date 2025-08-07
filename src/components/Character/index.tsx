@@ -1,22 +1,25 @@
 import { CharactersContainer, CharacterCard, Caption } from "./styles";
 
 import capa from "../../assets/img/capa.jpg";
-export default function Characters() {
+import { MarvelAPIResponse } from "../../models/Characters";
+
+type CharactersProps = {
+  characters: MarvelAPIResponse;
+};
+export default function Characters({ characters }: CharactersProps) {
   return (
     <CharactersContainer>
-      {[
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 5, 6, 8, 9, 10, 12, 15, 5, 6,
-      ].map((e, index) => (
+      {characters.data.results.map((character, index) => (
         <CharacterCard
           key={index}
           className="characterCard"
           style={{
-            background: `url(${capa}) no-repeat center`,
+            background: `url(${character.thumbnail.path}) no-repeat center`,
             backgroundSize: "contain",
             backgroundPosition: "center",
           }}
         >
-          <Caption className="caption">HQ's</Caption>
+          <Caption className="caption">{character.name}</Caption>
         </CharacterCard>
       ))}
     </CharactersContainer>

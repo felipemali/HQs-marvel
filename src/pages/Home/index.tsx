@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <>
       <Form />
-      <Characters />
+      <Characters characters={marvelCharacters} />
     </>
   );
 };
