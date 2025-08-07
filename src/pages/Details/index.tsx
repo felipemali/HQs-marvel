@@ -1,4 +1,13 @@
+import { useLocation } from "react-router-dom";
+import { MarvelCharacter } from "../../models/Characters";
+import { CharacterDetail } from "./CharacterDetail";
+
+type DetailsProps = {
+  character: MarvelCharacter;
+};
 const Details = () => {
-  return <h1>Details</h1>;
+  const location = useLocation();
+  const { character }: DetailsProps = location.state || {};
+  return <CharacterDetail character={character} />;
 };
 export default Details;
