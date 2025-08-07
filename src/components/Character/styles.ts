@@ -7,10 +7,9 @@ export const CharactersContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 0.138fr));
   grid-gap: 15px;
-  padding: 1em 0 0 3em;
+  padding: 1em 0 3em 3em;
   background-color: white;
   background-image: url(${paperImage});
-
   @media only screen and (max-width: 800px) {
     grid-template-columns: repeat(1, 1fr);
   }
