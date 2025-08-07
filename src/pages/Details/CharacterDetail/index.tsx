@@ -10,6 +10,7 @@ import {
   CharacterCardContainer,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
+
 type CharacterDetailProps = {
   character: MarvelCharacter;
 };
@@ -40,7 +41,13 @@ export const CharacterDetail = ({ character }: CharacterDetailProps) => {
         </CharacterCard>
         <DetailsContainer>
           <DescriptionCharacter>{character.description}</DescriptionCharacter>
-          <Button>Adicionar ao carrinho</Button>
+          <Button
+            onClick={() =>
+              navigate(`/carrinho/${character.name}`, { state: { character } })
+            }
+          >
+            Adicionar ao carrinho
+          </Button>
         </DetailsContainer>
       </CharacterCardContainer>
     </CharacterDetailContainer>
