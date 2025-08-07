@@ -25,8 +25,13 @@ export const Caption = styled.div`
   background-image: url(${paperImage});
   border: 1px solid black;
   box-shadow: 2px 2px black;
+  color: red;
   opacity: 1;
   transition: opacity 0.2s ease-in-out;
+`;
+
+export const CharacterCardContainer = styled.div`
+  border: 6px solid gold;
 `;
 
 export const CharacterCard = styled.div`
