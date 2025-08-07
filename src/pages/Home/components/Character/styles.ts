@@ -34,7 +34,6 @@ export const CharacterCard = styled.div`
   height: 300px;
   border: 2px solid black;
   box-shadow: 4px 4px black;
-  filter: grayscale(100%);
   transition: 0.2s linear;
   position: relative;
 
@@ -43,6 +42,9 @@ export const CharacterCard = styled.div`
     filter: grayscale(0%);
     box-shadow: 6px 6px black;
     transform: translate(-2px, -2px);
+  }
+  @media (min-width: 1024px) {
+    filter: grayscale(100%);
   }
   @media (min-width: 551px) and (max-width: 900px) {
     max-width: 70%;
