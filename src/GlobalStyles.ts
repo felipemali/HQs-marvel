@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import spidermanBg from "./assets/img/spiderman.jpg";
 
 export const GlobalStyle = createGlobalStyle`
@@ -14,4 +14,17 @@ export const GlobalStyle = createGlobalStyle`
       url(${spidermanBg}) no-repeat fixed center;
     background-size: cover;
   }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+`;
+export const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 `;

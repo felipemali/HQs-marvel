@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import routes from "./routes";
 import axios from "axios";
 import { Footer } from "./components/Footer";
+import { AppContainer } from "./GlobalStyles";
 
 const App = () => {
   // useEffect(() => {
@@ -20,10 +21,10 @@ const App = () => {
   const elements = useRoutes(routes);
 
   return (
-    <>
-      {elements}
+    <AppContainer>
+      <main style={{ flex: 1 }}> {elements}</main>
       <Footer />
-    </>
+    </AppContainer>
   );
 };
 
