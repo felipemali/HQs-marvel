@@ -13,6 +13,7 @@ import {
 import { CartType, MarvelCharacter } from "../../models/Characters";
 import { useEffect, useState } from "react";
 import { ShoppingCart } from "lucide-react";
+import { InputCoupon } from "./components/InputCoupon";
 
 type CartProps = {
   character: MarvelCharacter;
@@ -64,6 +65,7 @@ const Cart = () => {
         ))}
       </ItemList>
       <CheckoutContainer>
+        <InputCoupon />
         <TotalText>Total: R$ {cart.total.toFixed(2)}</TotalText>
         <Button onClick={() => alert("Compra finalizada com sucesso!")}>
           Finalizar Compra

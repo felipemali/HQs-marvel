@@ -9,7 +9,7 @@ export interface MarvelData {
   limit: number;
   total: number;
   count: number;
-  results: MarvelCharacter[] | undefined;
+  results: MarvelCharacter[];
 }
 
 export interface MarvelCharacter {

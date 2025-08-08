@@ -7,7 +7,7 @@ import { ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 type FormProps = {
-  characters: MarvelAPIResponse | undefined;
+  characters: MarvelAPIResponse;
   setCharacters: (characters: MarvelAPIResponse) => void;
 };
 export const Form = ({ characters, setCharacters }: FormProps) => {
