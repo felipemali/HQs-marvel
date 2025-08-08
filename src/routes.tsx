@@ -13,7 +13,7 @@ const routes: RouteObject[] = [
     element: <Details />,
   },
   {
-    path: "/carrinho/:name",
+    path: "/carrinho",
     element: <Cart />,
   },
 ];
