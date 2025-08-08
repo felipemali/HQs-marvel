@@ -11,13 +11,19 @@ import { CharactersContainer } from "../../pages/Home/components/Character/style
 import { MarvelAPIResponse } from "../../models/Characters";
 
 type PaginationProps = {
-  characters: MarvelAPIResponse;
+  characters: MarvelAPIResponse | null;
 };
 export const Pagination = ({ characters }: PaginationProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 14;
 
-  const totalPages = Math.ceil(characters.data.results.length / itemsPerPage);
+  if (!characters || !characters.data || !characters.data.results) {
+    return null;
+  }
+
+  const totalPages = Math.ceil(
+    characters?.data?.results?.length / itemsPerPage
+  );
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentItems = characters.data.results.slice(
     startIndex,

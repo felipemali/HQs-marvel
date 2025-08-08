@@ -14,6 +14,7 @@ import { CartType, MarvelCharacter } from "../../models/Characters";
 import { useEffect, useState } from "react";
 import { ShoppingCart } from "lucide-react";
 import { InputCoupon } from "./components/InputCoupon";
+import { useAppSelector } from "../../hooks";
 
 type CartProps = {
   character: MarvelCharacter;
@@ -24,19 +25,12 @@ export type CartTypeProps = {
   total: number;
 };
 const Cart = () => {
-  const [cart, setCart] = useState<CartTypeProps>({
-    items: [],
-    total: 0,
-  });
+  const cart = useAppSelector((state) => state.marvel.cart);
   const location = useLocation();
   const { character }: CartProps = location.state || {};
   const navigate = useNavigate();
   console.log("character no carrinho:", character);
 
-  useEffect(() => {
-    const updatedItems = [...cart.items, character];
-    setCart({ items: updatedItems, total: 20 });
-  }, [character]);
   return (
     <CartContainer>
       <img
@@ -53,7 +47,7 @@ const Cart = () => {
         <ShoppingCart size={50} />
       </CartTitle>
       <ItemList>
-        {cart.items.map((item) => (
+        {cart.map((item) => (
           <CartItem key={item.id}>
             <img src={item.thumbnail.path} alt={item.name} />
 
@@ -66,7 +60,7 @@ const Cart = () => {
       </ItemList>
       <CheckoutContainer>
         <InputCoupon />
-        <TotalText>Total: R$ {cart.total.toFixed(2)}</TotalText>
+        <TotalText>Total: R$ 20</TotalText>
         <Button onClick={() => alert("Compra finalizada com sucesso!")}>
           Finalizar Compra
         </Button>

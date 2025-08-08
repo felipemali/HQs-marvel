@@ -1,9 +1,10 @@
-import Characters from "./components/Character";
-import { Form } from "../../components/Form";
 import { marvelCharacters } from "../../api/characters";
-import { useEffect, useState } from "react";
-import { MarvelAPIResponse } from "../../models/Characters";
+import { useDispatch } from "react-redux";
+import { setCharacters } from "../../redux/store/marvelSlice";
+import { Form } from "../../components/Form";
+import { useEffect } from "react";
 import { Pagination } from "../../components/Pagination";
+import { useAppSelector } from "../../hooks";
 
 export type setFiltersProps = {
   orderBy: string;
@@ -11,15 +12,13 @@ export type setFiltersProps = {
 };
 
 const Home = () => {
-  const [characters, setCharacters] =
-    useState<MarvelAPIResponse>(marvelCharacters);
+  const characters = useAppSelector((state) => state.marvel.characters);
 
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (characters === undefined) {
-      setCharacters(marvelCharacters);
-    }
-    console.log("marvelCharacters", marvelCharacters);
-  }, []);
+    dispatch(setCharacters(marvelCharacters));
+  }, [dispatch]);
+
   return (
     <>
       <Form setCharacters={setCharacters} characters={characters} />

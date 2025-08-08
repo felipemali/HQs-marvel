@@ -10,12 +10,16 @@ import {
   CharacterCardContainer,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/store/marvelSlice";
 
 type CharacterDetailProps = {
   character: MarvelCharacter;
 };
 export const CharacterDetail = ({ character }: CharacterDetailProps) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <CharacterDetailContainer>
       <img
@@ -42,9 +46,10 @@ export const CharacterDetail = ({ character }: CharacterDetailProps) => {
         <DetailsContainer>
           <DescriptionCharacter>{character.description}</DescriptionCharacter>
           <Button
-            onClick={() =>
-              navigate(`/carrinho/${character.name}`, { state: { character } })
-            }
+            onClick={() => {
+              dispatch(addToCart(character));
+              navigate(`/carrinho`);
+            }}
           >
             Adicionar ao carrinho
           </Button>
