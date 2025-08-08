@@ -3,6 +3,7 @@ import { Form } from "../../components/Form";
 import { marvelCharacters } from "../../api/characters";
 import { useEffect, useState } from "react";
 import { MarvelAPIResponse } from "../../models/Characters";
+import { Pagination } from "../../components/Pagination";
 
 export type setFiltersProps = {
   orderBy: string;
@@ -10,7 +11,8 @@ export type setFiltersProps = {
 };
 
 const Home = () => {
-  const [characters, setCharacters] = useState<MarvelAPIResponse | undefined>();
+  const [characters, setCharacters] =
+    useState<MarvelAPIResponse>(marvelCharacters);
 
   useEffect(() => {
     if (characters === undefined) {
@@ -21,7 +23,7 @@ const Home = () => {
   return (
     <>
       <Form setCharacters={setCharacters} characters={characters} />
-      <Characters characters={characters} />
+      <Pagination characters={characters} />
     </>
   );
 };
