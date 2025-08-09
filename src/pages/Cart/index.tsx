@@ -10,14 +10,13 @@ import {
   CheckoutContainer,
   TotalText,
 } from "./styles";
-import { CartType, MarvelCharacter } from "../../models/Characters";
-import { useEffect, useState } from "react";
+import { CartType, MarvelHq } from "../../models/Hqs";
 import { ShoppingCart } from "lucide-react";
 import { InputCoupon } from "./components/InputCoupon";
 import { useAppSelector } from "../../hooks";
 
 type CartProps = {
-  character: MarvelCharacter;
+  hq: MarvelHq;
 };
 
 export type CartTypeProps = {
@@ -27,9 +26,9 @@ export type CartTypeProps = {
 const Cart = () => {
   const cart = useAppSelector((state) => state.marvel.cart);
   const location = useLocation();
-  const { character }: CartProps = location.state || {};
+  const { hq }: CartProps = location.state || {};
   const navigate = useNavigate();
-  console.log("character no carrinho:", character);
+  console.log("hqs no carrinho:", hq);
 
   return (
     <CartContainer>

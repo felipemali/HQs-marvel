@@ -1,16 +1,16 @@
 import { useRef } from "react";
-import { MarvelAPIResponse } from "../../models/Characters";
+import { MarvelAPIResponse } from "../../models/Hqs";
 import { SearchForm, SearchInput } from "./styles";
-import { marvelCharacters } from "../../api/characters";
+import { hqsMock } from "../../api/hqsMock";
 import { Button } from "../Button";
 import { ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 type FormProps = {
-  characters: MarvelAPIResponse | null;
-  setCharacters: (characters: MarvelAPIResponse) => void;
+  hqs: MarvelAPIResponse | null;
+  setHqs: (characters: MarvelAPIResponse) => void;
 };
-export const Form = ({ characters, setCharacters }: FormProps) => {
+export const Form = ({ hqs, setHqs }: FormProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -19,25 +19,25 @@ export const Form = ({ characters, setCharacters }: FormProps) => {
     const value = inputRef.current?.value;
     console.log("Valor do input:", value);
 
-    if (value) {
-      const filteredResults = marvelCharacters?.data.results?.filter((row) =>
+    if (value && hqs) {
+      const filteredResults = hqs.data.results?.filter((row) =>
         row.name.toLowerCase().includes(value.toLowerCase())
       );
 
-      if (characters) {
-        const newCharacters: MarvelAPIResponse = {
-          ...characters,
+      if (hqs) {
+        const newHqs: MarvelAPIResponse = {
+          ...hqs,
           data: {
-            ...characters.data,
+            ...hqs.data,
             results: filteredResults,
           },
         };
         console.log("filteredResults", filteredResults);
 
-        setCharacters(newCharacters);
+        setHqs(newHqs);
       }
     } else {
-      setCharacters(marvelCharacters);
+      setHqs(hqsMock);
     }
   };
 
@@ -52,13 +52,7 @@ export const Form = ({ characters, setCharacters }: FormProps) => {
       <div>
         <Button type="submit">Buscar</Button>
         <Button type="reset">Limpar</Button>
-        <Button
-          onClick={() =>
-            navigate(`/carrinho/${marvelCharacters.data.results[0].name}`, {
-              state: { character: marvelCharacters.data.results[0] },
-            })
-          }
-        >
+        <Button onClick={() => navigate(`/carrinho`)}>
           <ShoppingCart size={15} />
         </Button>
       </div>

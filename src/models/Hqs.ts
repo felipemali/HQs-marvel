@@ -9,10 +9,10 @@ export interface MarvelData {
   limit: number;
   total: number;
   count: number;
-  results: MarvelCharacter[];
+  results: MarvelHq[];
 }
 
-export interface MarvelCharacter {
+export interface MarvelHq {
   id: number;
   name: string;
   description: string;

@@ -1,6 +1,6 @@
-import { marvelCharacters } from "../../api/characters";
+import { hqsMock } from "../../api/hqsMock";
 import { useDispatch } from "react-redux";
-import { setCharacters } from "../../redux/store/marvelSlice";
+import { setHqs } from "../../redux/store/marvelSlice";
 import { Form } from "../../components/Form";
 import { useEffect } from "react";
 import { Pagination } from "../../components/Pagination";
@@ -12,17 +12,17 @@ export type setFiltersProps = {
 };
 
 const Home = () => {
-  const characters = useAppSelector((state) => state.marvel.characters);
+  const hqs = useAppSelector((state) => state.marvel.hqs);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setCharacters(marvelCharacters));
+    dispatch(setHqs(hqsMock));
   }, [dispatch]);
 
   return (
     <>
-      <Form setCharacters={setCharacters} characters={characters} />
-      <Pagination characters={characters} />
+      <Form setHqs={setHqs} hqs={hqs} />
+      <Pagination hqs={hqs} />
     </>
   );
 };

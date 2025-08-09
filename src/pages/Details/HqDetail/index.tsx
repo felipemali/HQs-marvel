@@ -1,27 +1,27 @@
 import { Button } from "../../../components/Button";
 import { Caption } from "../../../components/Caption";
-import { MarvelCharacter } from "../../../models/Characters";
+import { MarvelHq } from "../../../models/Hqs";
 import ArrowLeft from "../../../assets/img/arrow_left.png";
 import {
-  CharacterDetailContainer,
-  CharacterCard,
-  DescriptionCharacter,
+  HqDetailContainer,
+  HqCard,
+  HqDescription,
   DetailsContainer,
-  CharacterCardContainer,
+  HqCardContainer,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/store/marvelSlice";
 
-type CharacterDetailProps = {
-  character: MarvelCharacter;
+type HqDetailProps = {
+  hq: MarvelHq;
 };
-export const CharacterDetail = ({ character }: CharacterDetailProps) => {
+export const HqDetail = ({ hq }: HqDetailProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   return (
-    <CharacterDetailContainer>
+    <HqDetailContainer>
       <img
         style={{ cursor: "pointer" }}
         src={ArrowLeft}
@@ -30,31 +30,30 @@ export const CharacterDetail = ({ character }: CharacterDetailProps) => {
         height={35}
         onClick={() => navigate("/")}
       />
-      <CharacterCardContainer>
-        <CharacterCard
-          className="characterCard"
+      <HqCardContainer>
+        <HqCard
           style={{
-            background: `url(${character.thumbnail.path}) no-repeat center`,
+            background: `url(${hq.thumbnail.path}) no-repeat center`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
           {/* <Star color="yellow" />
                   Raro */}
-          <Caption>{character.name}</Caption>
-        </CharacterCard>
+          <Caption>{hq.name}</Caption>
+        </HqCard>
         <DetailsContainer>
-          <DescriptionCharacter>{character.description}</DescriptionCharacter>
+          <HqDescription>{hq.description}</HqDescription>
           <Button
             onClick={() => {
-              dispatch(addToCart(character));
+              dispatch(addToCart(hq));
               navigate(`/carrinho`);
             }}
           >
             Adicionar ao carrinho
           </Button>
         </DetailsContainer>
-      </CharacterCardContainer>
-    </CharacterDetailContainer>
+      </HqCardContainer>
+    </HqDetailContainer>
   );
 };

@@ -1,13 +1,13 @@
 import { useLocation } from "react-router-dom";
-import { MarvelCharacter } from "../../models/Characters";
-import { CharacterDetail } from "./CharacterDetail";
+import { MarvelHq } from "../../models/Hqs";
+import { HqDetail } from "./HqDetail";
 
 type DetailsProps = {
-  character: MarvelCharacter;
+  hq: MarvelHq;
 };
 const Details = () => {
   const location = useLocation();
-  const { character }: DetailsProps = location.state || {};
-  return <CharacterDetail character={character} />;
+  const { hq }: DetailsProps = location.state || {};
+  return <HqDetail hq={hq} />;
 };
 export default Details;

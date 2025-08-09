@@ -1,31 +1,23 @@
-import React, { useState } from "react";
-import {
-  PaginationContainer,
-  ItemPagination,
-  PaginationControls,
-  PageButton,
-} from "./style";
-import { marvelCharacters } from "../../api/characters";
-import Characters from "../../pages/Home/components/Character";
-import { CharactersContainer } from "../../pages/Home/components/Character/styles";
-import { MarvelAPIResponse } from "../../models/Characters";
+import { useState } from "react";
+import { PaginationContainer, PaginationControls, PageButton } from "./style";
+import Hqs from "../../pages/Home/components/Hq";
+import { HqsContainer } from "../../pages/Home/components/Hq/styles";
+import { MarvelAPIResponse } from "../../models/Hqs";
 
 type PaginationProps = {
-  characters: MarvelAPIResponse | null;
+  hqs: MarvelAPIResponse | null;
 };
-export const Pagination = ({ characters }: PaginationProps) => {
+export const Pagination = ({ hqs }: PaginationProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 14;
 
-  if (!characters || !characters.data || !characters.data.results) {
+  if (!hqs || !hqs.data || !hqs.data.results) {
     return null;
   }
 
-  const totalPages = Math.ceil(
-    characters?.data?.results?.length / itemsPerPage
-  );
+  const totalPages = Math.ceil(hqs?.data?.results?.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = characters.data.results.slice(
+  const currentItems = hqs.data.results.slice(
     startIndex,
     startIndex + itemsPerPage
   );
@@ -36,11 +28,11 @@ export const Pagination = ({ characters }: PaginationProps) => {
 
   return (
     <PaginationContainer>
-      <CharactersContainer>
+      <HqsContainer>
         {currentItems.map((item) => (
-          <Characters key={item.id} character={item} />
+          <Hqs key={item.id} hq={item} />
         ))}
-      </CharactersContainer>
+      </HqsContainer>
 
       <PaginationControls>
         {Array.from({ length: totalPages }, (_, i) => (

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import paperImage from "../../../../assets/img/paper.jpg";
 
-export const CharactersContainer = styled.div`
+export const HqsContainer = styled.div`
   max-width: 80vw;
   margin: 2em auto 0 auto;
   display: grid;
@@ -22,11 +22,11 @@ export const CharactersContainer = styled.div`
   }
 `;
 
-export const CharacterCardContainer = styled.div`
+export const HqCardContainer = styled.div`
   border: 6px solid gold;
 `;
 
-export const CharacterCard = styled.div`
+export const HqCard = styled.div`
   background: rgba(255, 255, 255, 0.67);
   padding: 2em;
   display: flex;
