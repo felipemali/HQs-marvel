@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <>
-      <Form setHqs={setHqs} hqs={hqs} />
+      <Form />
       <Pagination hqs={hqs} />
     </>
   );

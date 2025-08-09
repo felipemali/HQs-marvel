@@ -1,15 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PaginationContainer, PaginationControls, PageButton } from "./style";
 import Hqs from "../../pages/Home/components/Hq";
 import { HqsContainer } from "../../pages/Home/components/Hq/styles";
-import { MarvelAPIResponse } from "../../models/Hqs";
+import { MarvelAPIResponse, MarvelHq } from "../../models/Hqs";
+import { useAppSelector } from "../../hooks";
 
 type PaginationProps = {
   hqs: MarvelAPIResponse | null;
 };
 export const Pagination = ({ hqs }: PaginationProps) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [filtered, setFiltered] = useState<MarvelHq[]>([]);
+  const search = useAppSelector((state) => state.marvel.search);
+
   const itemsPerPage = 14;
+
+  useEffect(() => {
+    if (hqs) {
+      const filteredResults = hqs.data.results.filter((row) => {
+        if (search) {
+          return row.name.toLowerCase().includes(search.toLowerCase());
+        }
+        return true;
+      });
+
+      setFiltered(filteredResults);
+    }
+  }, [search]);
 
   if (!hqs || !hqs.data || !hqs.data.results) {
     return null;
@@ -29,9 +46,9 @@ export const Pagination = ({ hqs }: PaginationProps) => {
   return (
     <PaginationContainer>
       <HqsContainer>
-        {currentItems.map((item) => (
-          <Hqs key={item.id} hq={item} />
-        ))}
+        {search
+          ? filtered.map((item) => <Hqs key={item.id} hq={item} />)
+          : currentItems.map((item) => <Hqs key={item.id} hq={item} />)}
       </HqsContainer>
 
       <PaginationControls>

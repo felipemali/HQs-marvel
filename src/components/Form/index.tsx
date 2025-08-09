@@ -1,44 +1,21 @@
 import { useRef } from "react";
-import { MarvelAPIResponse } from "../../models/Hqs";
 import { SearchForm, SearchInput } from "./styles";
-import { hqsMock } from "../../api/hqsMock";
 import { Button } from "../Button";
 import { ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setSearch } from "../../redux/store/marvelSlice";
 
-type FormProps = {
-  hqs: MarvelAPIResponse | null;
-  setHqs: (characters: MarvelAPIResponse) => void;
-};
-export const Form = ({ hqs, setHqs }: FormProps) => {
+export const Form = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const value = inputRef.current?.value;
+    dispatch(setSearch(value));
     console.log("Valor do input:", value);
-
-    if (value && hqs) {
-      const filteredResults = hqs.data.results?.filter((row) =>
-        row.name.toLowerCase().includes(value.toLowerCase())
-      );
-
-      if (hqs) {
-        const newHqs: MarvelAPIResponse = {
-          ...hqs,
-          data: {
-            ...hqs.data,
-            results: filteredResults,
-          },
-        };
-        console.log("filteredResults", filteredResults);
-
-        setHqs(newHqs);
-      }
-    } else {
-      setHqs(hqsMock);
-    }
   };
 
   return (
