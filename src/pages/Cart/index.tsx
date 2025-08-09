@@ -10,13 +10,14 @@ import {
   CheckoutContainer,
   TotalText,
 } from "./styles";
-import { CartType, MarvelHq } from "../../models/Hqs";
+import { CartType } from "../../models/Hqs";
 import { ShoppingCart } from "lucide-react";
 import { InputCoupon } from "./components/InputCoupon";
 import { useAppSelector } from "../../hooks";
+import { MarvelComic } from "../../models/comicks";
 
 type CartProps = {
-  hq: MarvelHq;
+  comic: MarvelComic;
 };
 
 export type CartTypeProps = {
@@ -26,9 +27,9 @@ export type CartTypeProps = {
 const Cart = () => {
   const cart = useAppSelector((state) => state.marvel.cart);
   const location = useLocation();
-  const { hq }: CartProps = location.state || {};
+  const { comic }: CartProps = location.state || {};
   const navigate = useNavigate();
-  console.log("hqs no carrinho:", hq);
+  console.log("hqs no carrinho:", comic);
 
   return (
     <CartContainer>
@@ -48,10 +49,10 @@ const Cart = () => {
       <ItemList>
         {cart.map((item) => (
           <CartItem key={item.id}>
-            <img src={item.thumbnail.path} alt={item.name} />
+            <img src={item.thumbnail.path} alt={item.title} />
 
             <div className="info">
-              <div className="title">{item.name}</div>
+              <div className="title">{item.title}</div>
               <div className="price">R$ 20</div>
             </div>
           </CartItem>

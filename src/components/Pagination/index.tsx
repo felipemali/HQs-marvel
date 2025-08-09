@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
 import { PaginationContainer, PaginationControls, PageButton } from "./style";
-import Hqs from "../../pages/Home/components/Hq";
-import { HqsContainer } from "../../pages/Home/components/Hq/styles";
-import { MarvelAPIResponse, MarvelHq } from "../../models/Hqs";
+import Comic from "../../pages/Home/components/Comic";
+import { ComicContainer } from "../../pages/Home/components/Comic/styles";
 import { useAppSelector } from "../../hooks";
+import { MarvelComic, MarvelComicsAPIResponse } from "../../models/comicks";
 
 type PaginationProps = {
-  hqs: MarvelAPIResponse | null;
+  comics: MarvelComicsAPIResponse | null;
 };
-export const Pagination = ({ hqs }: PaginationProps) => {
+export const Pagination = ({ comics }: PaginationProps) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filtered, setFiltered] = useState<MarvelHq[]>([]);
+  const [filtered, setFiltered] = useState<MarvelComic[]>([]);
   const search = useAppSelector((state) => state.marvel.search);
 
   const itemsPerPage = 14;
 
   useEffect(() => {
-    if (hqs) {
-      const filteredResults = hqs.data.results.filter((row) => {
+    if (comics) {
+      const filteredResults = comics.data.results.filter((comic) => {
         if (search) {
-          return row.name.toLowerCase().includes(search.toLowerCase());
+          return comic.title.toLowerCase().includes(search.toLowerCase());
         }
         return true;
       });
@@ -28,13 +28,13 @@ export const Pagination = ({ hqs }: PaginationProps) => {
     }
   }, [search]);
 
-  if (!hqs || !hqs.data || !hqs.data.results) {
+  if (!comics || !comics.data || !comics.data.results) {
     return null;
   }
 
-  const totalPages = Math.ceil(hqs?.data?.results?.length / itemsPerPage);
+  const totalPages = Math.ceil(comics?.data?.results?.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = hqs.data.results.slice(
+  const currentItems = comics.data.results.slice(
     startIndex,
     startIndex + itemsPerPage
   );
@@ -45,11 +45,11 @@ export const Pagination = ({ hqs }: PaginationProps) => {
 
   return (
     <PaginationContainer>
-      <HqsContainer>
+      <ComicContainer>
         {search
-          ? filtered.map((item) => <Hqs key={item.id} hq={item} />)
-          : currentItems.map((item) => <Hqs key={item.id} hq={item} />)}
-      </HqsContainer>
+          ? filtered.map((item) => <Comic key={item.id} comic={item} />)
+          : currentItems.map((item) => <Comic key={item.id} comic={item} />)}
+      </ComicContainer>
 
       <PaginationControls>
         {Array.from({ length: totalPages }, (_, i) => (

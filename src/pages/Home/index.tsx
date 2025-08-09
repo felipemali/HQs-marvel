@@ -1,10 +1,10 @@
-import { hqsMock } from "../../api/hqsMock";
+import { marvelComicsMock } from "../../api/comicsMock";
 import { useDispatch } from "react-redux";
-import { setHqs } from "../../redux/store/marvelSlice";
 import { Form } from "../../components/Form";
 import { useEffect } from "react";
 import { Pagination } from "../../components/Pagination";
 import { useAppSelector } from "../../hooks";
+import { setComics } from "../../redux/store/marvelSlice";
 
 export type setFiltersProps = {
   orderBy: string;
@@ -12,17 +12,17 @@ export type setFiltersProps = {
 };
 
 const Home = () => {
-  const hqs = useAppSelector((state) => state.marvel.hqs);
+  const comics = useAppSelector((state) => state.marvel.comics);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setHqs(hqsMock));
+    dispatch(setComics(marvelComicsMock));
   }, [dispatch]);
 
   return (
     <>
       <Form />
-      <Pagination hqs={hqs} />
+      <Pagination comics={comics} />
     </>
   );
 };

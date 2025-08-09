@@ -1,27 +1,27 @@
 import { Button } from "../../../components/Button";
 import { Caption } from "../../../components/Caption";
-import { MarvelHq } from "../../../models/Hqs";
 import ArrowLeft from "../../../assets/img/arrow_left.png";
 import {
-  HqDetailContainer,
-  HqCard,
-  HqDescription,
+  ComicDetailContainer,
+  ComicCard,
+  ComicDescription,
   DetailsContainer,
-  HqCardContainer,
+  ComicCardContainer,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/store/marvelSlice";
+import { MarvelComic } from "../../../models/comicks";
 
-type HqDetailProps = {
-  hq: MarvelHq;
+type ComicDetailProps = {
+  comic: MarvelComic;
 };
-export const HqDetail = ({ hq }: HqDetailProps) => {
+export const ComicDetail = ({ comic }: ComicDetailProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   return (
-    <HqDetailContainer>
+    <ComicDetailContainer>
       <img
         style={{ cursor: "pointer" }}
         src={ArrowLeft}
@@ -30,30 +30,30 @@ export const HqDetail = ({ hq }: HqDetailProps) => {
         height={35}
         onClick={() => navigate("/")}
       />
-      <HqCardContainer>
-        <HqCard
+      <ComicCardContainer>
+        <ComicCard
           style={{
-            background: `url(${hq.thumbnail.path}) no-repeat center`,
+            background: `url(${comic.thumbnail.path}) no-repeat center`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
           {/* <Star color="yellow" />
                   Raro */}
-          <Caption>{hq.name}</Caption>
-        </HqCard>
+          <Caption>{comic.title}</Caption>
+        </ComicCard>
         <DetailsContainer>
-          <HqDescription>{hq.description}</HqDescription>
+          <ComicDescription>{comic.description}</ComicDescription>
           <Button
             onClick={() => {
-              dispatch(addToCart(hq));
+              dispatch(addToCart(comic));
               navigate(`/carrinho`);
             }}
           >
             Adicionar ao carrinho
           </Button>
         </DetailsContainer>
-      </HqCardContainer>
-    </HqDetailContainer>
+      </ComicCardContainer>
+    </ComicDetailContainer>
   );
 };

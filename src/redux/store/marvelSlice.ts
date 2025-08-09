@@ -1,36 +1,34 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MarvelAPIResponse, MarvelHq } from "../../models/Hqs";
-import { MarvelComicsAPIResponse } from "../../models/comicks";
+import { MarvelComic, MarvelComicsAPIResponse } from "../../models/comicks";
 
 type MarvelState = {
-  hqs: MarvelAPIResponse | null;
-  cart: MarvelHq[];
+  comics: MarvelComicsAPIResponse | null;
+  cart: MarvelComic[];
   search: string | undefined;
 };
 
 const initialState: MarvelState = {
-  hqs: null,
+  comics: null,
   cart: [],
   search: "",
 };
-
-const marvelSlice = createSlice({
+const marvelSliceComics = createSlice({
   name: "marvel",
   initialState,
   reducers: {
-    setHqs(state, action: PayloadAction<MarvelAPIResponse | null>) {
-      state.hqs = action.payload;
+    setComics(state, action: PayloadAction<MarvelComicsAPIResponse | null>) {
+      state.comics = action.payload;
     },
     setSearch(state, action: PayloadAction<string | undefined>) {
       state.search = action.payload;
     },
-    addToCart(state, action: PayloadAction<MarvelHq>) {
+    addToCart(state, action: PayloadAction<MarvelComic>) {
       const exists = state.cart.find(
         (character) => character.id === action.payload.id
       );
       if (!exists) state.cart.push(action.payload);
     },
-    removeHqCart(state, action: PayloadAction<number>) {
+    removeComicCart(state, action: PayloadAction<number>) {
       state.cart = state.cart.filter(
         (character) => character.id !== action.payload
       );
@@ -41,6 +39,6 @@ const marvelSlice = createSlice({
   },
 });
 
-export const { setHqs, setSearch, addToCart, removeHqCart, clearCart } =
-  marvelSlice.actions;
-export default marvelSlice.reducer;
+export const { setComics, setSearch, addToCart, removeComicCart, clearCart } =
+  marvelSliceComics.actions;
+export default marvelSliceComics.reducer;
