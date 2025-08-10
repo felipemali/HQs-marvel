@@ -15,9 +15,13 @@ export const ComicDetailContainer = styled.div`
   }
 `;
 
-// export const CharacterCardContainer = styled.div`
-//   border: 6px solid gold;
-// `;
+export const Image = styled.img`
+  transition: 0.2s linear;
+
+  &:hover {
+    transform: translate(-2px, -2px);
+  }
+`;
 export const ComicCardContainer = styled.div`
   display: flex;
   @media only screen and (max-width: 900px) {

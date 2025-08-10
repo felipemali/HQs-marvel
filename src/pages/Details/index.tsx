@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { ComicDetail } from "./HqDetail";
-import { MarvelComic, MarvelComicRarity } from "../../models/comicks";
+import { MarvelComicRarity } from "../../models/comicks";
 
 type DetailsProps = {
   comic: MarvelComicRarity;
