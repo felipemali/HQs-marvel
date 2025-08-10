@@ -1,10 +1,13 @@
-import { marvelComicsMock } from "../../api/comicsMock";
 import { useDispatch } from "react-redux";
 import { Form } from "../../components/Form";
 import { useEffect } from "react";
 import { Pagination } from "../../components/Pagination";
 import { useAppSelector } from "../../hooks";
 import { setComics } from "../../redux/store/marvelSlice";
+import {
+  MarvelComicRarity,
+  MarvelComicsAPIResponse,
+} from "../../models/comicks";
 
 export type setFiltersProps = {
   orderBy: string;
@@ -12,12 +15,27 @@ export type setFiltersProps = {
 };
 
 const Home = () => {
-  const comics = useAppSelector((state) => state.marvel.comics);
+  const comics = useAppSelector(
+    (state) => state.marvel.comics
+  ) as MarvelComicsAPIResponse<MarvelComicRarity> | null;
+  const search = useAppSelector((state) => state.marvel.search);
+  const currentPage = useAppSelector((state) => state.marvel.currentPage);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(setComics(marvelComicsMock));
-  }, [dispatch]);
+    console.log("search digitado:", search);
+
+    fetch(
+      `http://localhost:3001/api/comics?page=${currentPage}&limit=14&search=${search}`
+    )
+      .then((res) => res.json())
+      .then((data: MarvelComicsAPIResponse<MarvelComicRarity>) => {
+        console.log("comics:", data);
+        console.log("aqui no useEffect com search:", data);
+        dispatch(setComics(data));
+      });
+  }, [dispatch, currentPage, search]);
 
   return (
     <>
