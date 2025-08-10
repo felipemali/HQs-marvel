@@ -2,15 +2,16 @@ import { ComicCard } from "./styles";
 
 import { Caption } from "../../../../components/Caption";
 import { useNavigate } from "react-router-dom";
-import { MarvelComic } from "../../../../models/comicks";
+import { MarvelComicRarity } from "../../../../models/comicks";
 
 type ComicsProps = {
-  comic: MarvelComic;
+  comic: MarvelComicRarity;
 };
 export default function Comic({ comic }: ComicsProps) {
   const navigate = useNavigate();
   return (
     <ComicCard
+      isRare={comic.isRare}
       onClick={() => navigate(`/detalhes/${comic.title}`, { state: { comic } })}
       key={comic.id}
       style={{
@@ -19,8 +20,6 @@ export default function Comic({ comic }: ComicsProps) {
         backgroundPosition: "center",
       }}
     >
-      {/* <Star color="yellow" />
-          Raro */}
       <Caption>{comic.title}</Caption>
     </ComicCard>
   );
