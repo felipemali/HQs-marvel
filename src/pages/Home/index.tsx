@@ -7,7 +7,7 @@ import { setComics } from "../../redux/store/marvelSlice";
 import {
   MarvelComicRarity,
   MarvelComicsAPIResponse,
-} from "../../models/comicks";
+} from "../../models/comics";
 
 export type setFiltersProps = {
   orderBy: string;

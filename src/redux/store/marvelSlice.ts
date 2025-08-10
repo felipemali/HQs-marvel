@@ -3,7 +3,7 @@ import {
   MarvelComic,
   MarvelComicRarity,
   MarvelComicsAPIResponse,
-} from "../../models/comicks";
+} from "../../models/comics";
 
 type MarvelState = {
   comics: MarvelComicsAPIResponse | null;

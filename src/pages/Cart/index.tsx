@@ -12,11 +12,11 @@ import {
   MessageCartEmpty,
   Image,
 } from "./styles";
-import { CartType } from "../../models/Hqs";
+import { CartType } from "../../models/comics";
 import { ShoppingCart } from "lucide-react";
 import { InputCoupon } from "./components/InputCoupon";
 import { useAppSelector } from "../../hooks";
-import { MarvelComicRarity } from "../../models/comicks";
+import { MarvelComicRarity } from "../../models/comics";
 import { useTotalCart } from "../../hooks/totalCart";
 
 type CartProps = {
@@ -53,7 +53,7 @@ const Cart = () => {
       <ItemList>
         {cart.length > 0 ? (
           cart.map((item) => (
-            <CartItem key={item.id}>
+            <CartItem data-testid="cart-item" key={item.id}>
               <img src={item.thumbnail.path} alt={item.title} />
 
               <div className="info">

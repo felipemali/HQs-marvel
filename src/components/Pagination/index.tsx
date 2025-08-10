@@ -5,7 +5,7 @@ import { useAppSelector } from "../../hooks";
 import {
   MarvelComicRarity,
   MarvelComicsAPIResponse,
-} from "../../models/comicks";
+} from "../../models/comics";
 import { useDispatch } from "react-redux";
 import { setCurrentPage } from "../../redux/store/marvelSlice";
 
