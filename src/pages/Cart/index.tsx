@@ -9,15 +9,18 @@ import {
   CartItem,
   CheckoutContainer,
   TotalText,
+  MessageCartEmpty,
+  Image,
 } from "./styles";
 import { CartType } from "../../models/Hqs";
 import { ShoppingCart } from "lucide-react";
 import { InputCoupon } from "./components/InputCoupon";
 import { useAppSelector } from "../../hooks";
-import { MarvelComic } from "../../models/comicks";
+import { MarvelComicRarity } from "../../models/comicks";
+import { useTotalCart } from "../../hooks/totalCart";
 
 type CartProps = {
-  comic: MarvelComic;
+  comic: MarvelComicRarity;
 };
 
 export type CartTypeProps = {
@@ -31,10 +34,11 @@ const Cart = () => {
   const navigate = useNavigate();
   console.log("hqs no carrinho:", comic);
 
+  const total = useTotalCart(cart);
+
   return (
     <CartContainer>
-      <img
-        style={{ cursor: "pointer" }}
+      <Image
         src={ArrowLeft}
         alt="Voltar"
         width={35}
@@ -47,24 +51,30 @@ const Cart = () => {
         <ShoppingCart size={50} />
       </CartTitle>
       <ItemList>
-        {cart.map((item) => (
-          <CartItem key={item.id}>
-            <img src={item.thumbnail.path} alt={item.title} />
+        {cart.length > 0 ? (
+          cart.map((item) => (
+            <CartItem key={item.id}>
+              <img src={item.thumbnail.path} alt={item.title} />
 
-            <div className="info">
-              <div className="title">{item.title}</div>
-              <div className="price">R$ 20</div>
-            </div>
-          </CartItem>
-        ))}
+              <div className="info">
+                <div className="title">{item.title}</div>
+                <div className="price">R$ {item.prices[0].price}</div>
+              </div>
+            </CartItem>
+          ))
+        ) : (
+          <MessageCartEmpty>Carrinho vazio... </MessageCartEmpty>
+        )}
       </ItemList>
-      <CheckoutContainer>
-        <InputCoupon />
-        <TotalText>Total: R$ 20</TotalText>
-        <Button onClick={() => alert("Compra finalizada com sucesso!")}>
-          Finalizar Compra
-        </Button>
-      </CheckoutContainer>
+      {cart.length > 0 && (
+        <CheckoutContainer>
+          <InputCoupon />
+          <TotalText>Total: {total.toFixed(2)}</TotalText>
+          <Button onClick={() => alert("Compra finalizada com sucesso!")}>
+            Finalizar Compra
+          </Button>
+        </CheckoutContainer>
+      )}
     </CartContainer>
   );
 };

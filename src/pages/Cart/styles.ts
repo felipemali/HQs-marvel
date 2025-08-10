@@ -14,7 +14,12 @@ export const CartContainer = styled.div`
     padding: 1em;
   }
 `;
-
+export const MessageCartEmpty = styled.h1`
+  display: flex;
+  align-items: center;
+  display: contents;
+  color: red;
+`;
 export const CartTitle = styled.h1`
   font-family: "Bangers", cursive;
   font-size: 2.5em;
@@ -23,8 +28,16 @@ export const CartTitle = styled.h1`
   display: flex;
   align-items: center;
 `;
+export const Image = styled.img`
+  transition: 0.2s linear;
 
+  &:hover {
+    transform: translate(-2px, -2px);
+  }
+`;
 export const ItemList = styled.div`
+  max-height: 400px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 1.5em;
