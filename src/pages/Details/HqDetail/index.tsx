@@ -7,23 +7,40 @@ import {
   ComicDescription,
   DetailsContainer,
   ComicCardContainer,
+  Image,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/store/marvelSlice";
-import { MarvelComic } from "../../../models/comicks";
+import { MarvelComicRarity } from "../../../models/comicks";
+import { useAppSelector } from "../../../hooks";
+import { Alert } from "../../../components/Alert";
+import { useState } from "react";
 
 type ComicDetailProps = {
-  comic: MarvelComic;
+  comic: MarvelComicRarity;
 };
 export const ComicDetail = ({ comic }: ComicDetailProps) => {
+  const [alert, setAlert] = useState(false);
+  const cart = useAppSelector((state) => state.marvel.cart);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const handleClick = (comic: MarvelComicRarity) => {
+    const verifiquedCart = cart.find((item) => item.id === comic.id);
+    if (!verifiquedCart) {
+      dispatch(addToCart(comic));
+      navigate(`/carrinho`);
+    } else {
+      setAlert(true);
+      console.log("caiuuuu no else");
+      setTimeout(() => setAlert(false), 3000);
+    }
+  };
   return (
     <ComicDetailContainer>
-      <img
-        style={{ cursor: "pointer" }}
+      <Image
         src={ArrowLeft}
         alt="Voltar"
         width={35}
@@ -38,20 +55,16 @@ export const ComicDetail = ({ comic }: ComicDetailProps) => {
             backgroundPosition: "center",
           }}
         >
-          {/* <Star color="yellow" />
-                  Raro */}
           <Caption>{comic.title}</Caption>
         </ComicCard>
         <DetailsContainer>
           <ComicDescription>{comic.description}</ComicDescription>
-          <Button
-            onClick={() => {
-              dispatch(addToCart(comic));
-              navigate(`/carrinho`);
-            }}
-          >
+          <Button onClick={() => handleClick(comic)}>
             Adicionar ao carrinho
           </Button>
+          {alert && (
+            <Alert type="error">Essa HQ ja foi adicionado ao carrinho.</Alert>
+          )}
         </DetailsContainer>
       </ComicCardContainer>
     </ComicDetailContainer>
