@@ -1,4 +1,4 @@
-import { MarvelComicRarity } from "../models/comicks";
+import { MarvelComicRarity } from "../models/comics";
 
 export const useTotalCart = (comics: MarvelComicRarity[]) => {
   return comics.reduce((acc, comic) => {
