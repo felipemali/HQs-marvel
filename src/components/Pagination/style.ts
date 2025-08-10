@@ -1,5 +1,7 @@
 import styled from "styled-components";
-
+interface PageButtonProps {
+  active: boolean;
+}
 export const PaginationContainer = styled.div`
   margin: 0 auto;
 `;
@@ -18,7 +20,9 @@ export const PaginationControls = styled.div`
   margin-top: 16px;
 `;
 
-export const PageButton = styled.button<{ active?: boolean }>`
+export const PageButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== "active",
+})<PageButtonProps>`
   padding: 6px 12px;
   background-color: ${({ active }) => (active ? "#333" : "#ccc")};
   color: white;
