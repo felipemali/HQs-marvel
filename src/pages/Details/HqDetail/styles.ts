@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import paperImage from "../../../assets/img/paper.jpg";
 
-export const ComicDetailContainer = styled.div`
+export const ComicDetailContainer = styled.main`
   max-width: 50vw;
   margin: 2em auto 0 auto;
   padding: 1em 0 3em 1em;
@@ -28,6 +28,7 @@ export const ComicCardContainer = styled.div`
     display: block;
   }
 `;
+
 export const ComicCard = styled.div`
   background: rgba(255, 255, 255, 0.67);
   padding: 2em;

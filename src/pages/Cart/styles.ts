@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import paperImage from "../../assets/img/paper.jpg";
 
-export const CartContainer = styled.div`
+export const CartContainer = styled.main`
   max-width: 60vw;
   margin: 2em auto;
   padding: 2em;

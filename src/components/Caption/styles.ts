@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import paperImage from "../../assets/img/paper.jpg";
 
-export const CaptionStyle = styled.div`
+export const CaptionStyle = styled.p`
   width: 100%;
   font-family: "Bangers", cursive;
   font-size: 1.6em;

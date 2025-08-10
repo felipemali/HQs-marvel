@@ -2,7 +2,7 @@ import styled from "styled-components";
 interface PageButtonProps {
   active: boolean;
 }
-export const PaginationContainer = styled.div`
+export const PaginationContainer = styled.main`
   margin: 0 auto;
 `;
 
