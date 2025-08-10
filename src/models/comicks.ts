@@ -1,17 +1,19 @@
-export interface MarvelComicsAPIResponse {
+export interface MarvelComicsAPIResponse<T = MarvelComic> {
   code: number;
   status: string;
-  data: ComicsDataContainer;
+  data: ComicsDataContainer<T>;
 }
 
-export interface ComicsDataContainer {
+export interface ComicsDataContainer<T> {
   offset: number;
   limit: number;
   total: number;
   count: number;
-  results: MarvelComic[];
+  results: T[];
 }
-
+export interface MarvelComicRarity extends MarvelComic {
+  isRare: boolean;
+}
 export interface MarvelComic {
   id: number;
   digitalId: number;
