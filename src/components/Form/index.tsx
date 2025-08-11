@@ -18,20 +18,7 @@ export const Form = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const value = inputRef.current?.value;
-    if (!value) {
-      setError({
-        text: "Campo obrigatório!",
-        state: true,
-      });
-      setTimeout(() => {
-        setError({
-          text: "",
-          state: false,
-        });
-      }, 3000);
 
-      return;
-    }
     dispatch(setSearch(value));
     console.log("Valor do input:", value);
   };
@@ -55,7 +42,6 @@ export const Form = () => {
         <Button data-testid="add-to-cart" onClick={() => navigate(`/carrinho`)}>
           <ShoppingCart size={15} />
         </Button>
-        {error.state && <Alert type="error">Campo obrigatório!</Alert>}
       </div>
     </SearchForm>
   );
