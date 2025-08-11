@@ -34,6 +34,10 @@ https://backend-testeapp.onrender.com/api/comics
 exemplo: https://backend-testeapp.onrender.com/api/comics?limit=14&search=spider
 -Retornará todos quadrinhos que tenha o nome spider
 
+
+
+#### FRONTEND ####
+
 # Sobre o projeto
 
 Este projeto é uma loja virtual focada na venda de quadrinhos da Marvel.

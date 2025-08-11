@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import paperImage from "../../../assets/img/paper.jpg";
+import paperImage from "../../../../assets/img/paper.jpg";
 
 interface ComicCardProps {
   isRare?: boolean;

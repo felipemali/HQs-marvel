@@ -1,6 +1,6 @@
-import { Button } from "../../../components/Button";
-import { Caption } from "../../../components/Caption";
-import ArrowLeft from "../../../assets/img/arrow_left.png";
+import { Button } from "../../../../components/Button";
+import { Caption } from "../../../../components/Caption";
+import ArrowLeft from "../../../../assets/img/arrow_left.png";
 import {
   ComicDetailContainer,
   ComicCard,
@@ -11,11 +11,12 @@ import {
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../../redux/store/marvelSlice";
-import { MarvelComicRarity } from "../../../models/comics";
-import { useAppSelector } from "../../../hooks";
-import { Alert } from "../../../components/Alert";
+import { addToCart } from "../../../../redux/store/marvelSlice";
+import { MarvelComicRarity } from "../../../../models/comics";
+import { useAppSelector } from "../../../../hooks";
+import { Alert } from "../../../../components/Alert";
 import { useState } from "react";
+import { ComicInfo } from "../ComicInfo";
 
 type ComicDetailProps = {
   comic: MarvelComicRarity;
@@ -60,6 +61,11 @@ export const ComicDetail = ({ comic }: ComicDetailProps) => {
         </ComicCard>
         <DetailsContainer>
           <ComicDescription>{comic.description}</ComicDescription>
+          <ComicInfo
+            dates={comic.dates}
+            format={comic.format}
+            prices={comic.prices}
+          />
           <Button onClick={() => handleClick(comic)}>
             Adicionar ao carrinho
           </Button>
