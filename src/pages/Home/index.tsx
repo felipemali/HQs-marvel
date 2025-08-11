@@ -24,15 +24,11 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("search digitado:", search);
-
     fetch(
       `https://backend-testeapp.onrender.com/api/comics?page=${currentPage}&limit=14&search=${search}`
     )
       .then((res) => res.json())
       .then((data: MarvelComicsAPIResponse<MarvelComicRarity>) => {
-        console.log("comics:", data);
-        console.log("aqui no useEffect com search:", data);
         dispatch(setComics(data));
       });
   }, [dispatch, currentPage, search]);
