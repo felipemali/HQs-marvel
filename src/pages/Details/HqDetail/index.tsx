@@ -49,6 +49,7 @@ export const ComicDetail = ({ comic }: ComicDetailProps) => {
       />
       <ComicCardContainer>
         <ComicCard
+          isRare={comic.isRare}
           style={{
             background: `url(${comic.thumbnail.path}) no-repeat center`,
             backgroundSize: "cover",

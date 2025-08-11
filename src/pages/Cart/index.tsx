@@ -16,26 +16,38 @@ import { CartType } from "../../models/comics";
 import { ShoppingCart } from "lucide-react";
 import { InputCoupon } from "./components/InputCoupon";
 import { useAppSelector } from "../../hooks";
-import { MarvelComicRarity } from "../../models/comics";
-import { useTotalCart } from "../../hooks/totalCart";
-
-type CartProps = {
-  comic: MarvelComicRarity;
-};
+import { Alert } from "../../components/Alert";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { clearCart, setComics } from "../../redux/store/marvelSlice";
 
 export type CartTypeProps = {
   items: CartType[];
   total: number;
 };
 const Cart = () => {
+  const [alert, setAlert] = useState(false);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
   const cart = useAppSelector((state) => state.marvel.cart);
-  const location = useLocation();
-  const { comic }: CartProps = location.state || {};
   const navigate = useNavigate();
-  console.log("hqs no carrinho:", comic);
+  const dispatch = useDispatch();
 
-  const total = useTotalCart(cart);
+  useEffect(() => {
+    const total = cart.reduce((acc, comic) => {
+      const sumPrices = comic.prices.reduce(
+        (sum, priceObj) => sum + priceObj.price,
+        0
+      );
+      return acc + sumPrices;
+    }, 0);
+    setTotalPrice(total);
+  }, [cart]);
 
+  const handleBuy = () => {
+    setAlert(true);
+
+    dispatch(clearCart());
+  };
   return (
     <CartContainer>
       <Image
@@ -63,20 +75,23 @@ const Cart = () => {
             </CartItem>
           ))
         ) : (
-          <MessageCartEmpty>Carrinho vazio... </MessageCartEmpty>
+          <>
+            <MessageCartEmpty>Carrinho vazio... </MessageCartEmpty>
+            {alert && (
+              <Alert type="success">Compra efetuada com sucesso!!</Alert>
+            )}
+          </>
         )}
       </ItemList>
       {cart.length > 0 && (
         <CheckoutContainer>
           <InputCoupon />
-          <TotalText>Total: {total.toFixed(2)}</TotalText>
-          <Button onClick={() => alert("Compra finalizada com sucesso!")}>
-            Finalizar Compra
-          </Button>
+          <TotalText>Total: {totalPrice.toFixed(2)}</TotalText>
+          <Button onClick={handleBuy}>Finalizar Compra</Button>
         </CheckoutContainer>
       )}
     </CartContainer>
   );
 };
-
+//
 export default Cart;

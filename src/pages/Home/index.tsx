@@ -25,16 +25,17 @@ const Home = () => {
 
   useEffect(() => {
     console.log("search digitado:", search);
-
-    fetch(
-      `http://localhost:3001/api/comics?page=${currentPage}&limit=14&search=${search}`
-    )
-      .then((res) => res.json())
-      .then((data: MarvelComicsAPIResponse<MarvelComicRarity>) => {
-        console.log("comics:", data);
-        console.log("aqui no useEffect com search:", data);
-        dispatch(setComics(data));
-      });
+    if (!comics) {
+      fetch(
+        `http://localhost:3001/api/comics?page=${currentPage}&limit=14&search=${search}`
+      )
+        .then((res) => res.json())
+        .then((data: MarvelComicsAPIResponse<MarvelComicRarity>) => {
+          console.log("comics:", data);
+          console.log("aqui no useEffect com search:", data);
+          dispatch(setComics(data));
+        });
+    }
   }, [dispatch, currentPage, search]);
 
   return (

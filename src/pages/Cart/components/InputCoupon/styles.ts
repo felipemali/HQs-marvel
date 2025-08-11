@@ -1,5 +1,7 @@
 import styled from "styled-components";
-
+interface MessageProps {
+  valid: boolean;
+}
 export const CouponContainer = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -26,7 +28,9 @@ export const CouponInput = styled.input`
   }
 `;
 
-export const Message = styled.p<{ valid: boolean }>`
+export const Message = styled.p.withConfig({
+  shouldForwardProp: (prop) => prop !== "active",
+})<MessageProps>`
   font-family: "Bangers", cursive;
   color: ${({ valid }) => (valid ? "green" : "red")};
   margin-top: 0.5em;

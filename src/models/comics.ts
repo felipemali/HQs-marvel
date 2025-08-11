@@ -44,6 +44,7 @@ export interface MarvelComic {
   characters: CharacterList;
   stories: StoryList;
   events: EventList;
+  originalPrice?: number;
 }
 
 export interface TextObject {

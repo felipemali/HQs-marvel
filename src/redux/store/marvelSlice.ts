@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  MarvelComic,
   MarvelComicRarity,
   MarvelComicsAPIResponse,
 } from "../../models/comics";
@@ -30,9 +29,17 @@ const marvelSliceComics = createSlice({
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
+    setCart(state, action: PayloadAction<MarvelComicRarity[]>) {
+      state.cart = action.payload;
+    },
     addToCart(state, action: PayloadAction<MarvelComicRarity>) {
       const exists = state.cart.find((comic) => comic.id === action.payload.id);
-      if (!exists) state.cart.push(action.payload);
+      if (!exists) {
+        state.cart.push({
+          ...action.payload,
+          originalPrice: action.payload.prices[0].price,
+        });
+      }
     },
     removeComicCart(state, action: PayloadAction<number>) {
       state.cart = state.cart.filter(
@@ -49,6 +56,7 @@ export const {
   setComics,
   setSearch,
   setCurrentPage,
+  setCart,
   addToCart,
   removeComicCart,
   clearCart,

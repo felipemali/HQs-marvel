@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import paperImage from "../../../assets/img/paper.jpg";
 
+interface ComicCardProps {
+  isRare?: boolean;
+}
 export const ComicDetailContainer = styled.main`
   max-width: 50vw;
   margin: 2em auto 0 auto;
@@ -24,12 +27,15 @@ export const Image = styled.img`
 `;
 export const ComicCardContainer = styled.div`
   display: flex;
+
   @media only screen and (max-width: 900px) {
     display: block;
   }
 `;
 
-export const ComicCard = styled.div`
+export const ComicCard = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "isRare",
+})<ComicCardProps>`
   background: rgba(255, 255, 255, 0.67);
   padding: 2em;
   min-width: 6vw;
@@ -37,14 +43,16 @@ export const ComicCard = styled.div`
   display: flex;
   flex-direction: column;
   height: 300px;
-  border: 2px solid black;
-  box-shadow: 4px 4px black;
+  border: ${({ isRare }) =>
+    isRare ? "10px groove #FFD700 " : "2px solid black"};
+  box-shadow: ${({ isRare }) => (isRare ? "none" : "4px 4px black")};
   transition: 0.2s linear;
   position: relative;
 
   &:hover {
     cursor: pointer;
-    box-shadow: 6px 6px black;
+    box-shadow: ${({ isRare }) =>
+      isRare ? " 6px 6px #FFD700" : "6px 6px black"};
     transform: translate(-2px, -2px);
   }
   @media (max-width: 900px) {

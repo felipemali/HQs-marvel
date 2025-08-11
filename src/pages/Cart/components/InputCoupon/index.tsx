@@ -1,17 +1,15 @@
 import { useRef, useState } from "react";
 import { CouponContainer, CouponInput, Message } from "./styles";
 import { Button } from "../../../../components/Button";
-
-const coupons = {
-  marvelraro10: { discount: 0.1, message: "Cupom raro aplicado com sucesso!" },
-  marvelcomum5: {
-    discount: 0.05,
-    message: "Cupom comum aplicado com sucesso!",
-  },
-} as const;
-type CouponKey = keyof typeof coupons;
+import { CouponKey, coupons } from "../../../../mock/coupons";
+import { useAppSelector } from "../../../../hooks";
+import { useDispatch } from "react-redux";
+import { setCart } from "../../../../redux/store/marvelSlice";
 
 export const InputCoupon = () => {
+  const cart = useAppSelector((state) => state.marvel.cart);
+  const dispatch = useDispatch();
+
   const [infoCoupon, setInfoCoupon] = useState({
     validCoupon: false,
     discount: 0,
@@ -25,6 +23,18 @@ export const InputCoupon = () => {
     const coupon = coupons[value as CouponKey];
 
     if (coupon) {
+      const newComicCoupon = cart.map((item) => {
+        const basePrice = item.originalPrice ?? item.prices[0].price;
+        const newPrice = item.isRare
+          ? basePrice * (1 - coupon.discount / 100)
+          : basePrice;
+        return {
+          ...item,
+          prices: [{ ...item.prices[0], price: newPrice }],
+        };
+      });
+      dispatch(setCart(newComicCoupon));
+
       setInfoCoupon({
         validCoupon: true,
         discount: coupon.discount,
@@ -38,8 +48,7 @@ export const InputCoupon = () => {
       });
     }
   };
-  // const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0);
-  // const total = subtotal - subtotal * discount;
+
   return (
     <>
       <CouponContainer>
@@ -51,9 +60,7 @@ export const InputCoupon = () => {
         <Button onClick={handleCoupon}>Aplicar</Button>
       </CouponContainer>
       {infoCoupon.message && (
-        <Message valid={infoCoupon.validCoupon ? true : false}>
-          {infoCoupon.message}
-        </Message>
+        <Message valid={infoCoupon.validCoupon}>{infoCoupon.message}</Message>
       )}
     </>
   );
