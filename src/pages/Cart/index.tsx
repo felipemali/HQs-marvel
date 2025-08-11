@@ -19,7 +19,7 @@ import { useAppSelector } from "../../hooks";
 import { Alert } from "../../components/Alert";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { clearCart, setComics } from "../../redux/store/marvelSlice";
+import { clearCart } from "../../redux/store/marvelSlice";
 
 export type CartTypeProps = {
   items: CartType[];
