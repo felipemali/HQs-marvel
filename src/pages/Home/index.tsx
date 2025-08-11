@@ -27,7 +27,7 @@ const Home = () => {
     console.log("search digitado:", search);
     if (!comics) {
       fetch(
-        `http://localhost:3001/api/comics?page=${currentPage}&limit=14&search=${search}`
+        `https://backend-testeapp.onrender.com/api/comics?page=${currentPage}&limit=14&search=${search}`
       )
         .then((res) => res.json())
         .then((data: MarvelComicsAPIResponse<MarvelComicRarity>) => {
