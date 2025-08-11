@@ -57,7 +57,4 @@ export const ComicCard = styled.div.withConfig({
 `;
 export const ComicCardContainer = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "isRare",
-})<ComicCardProps>`
-  border: ${({ isRare }) =>
-    isRare ? "10px groove #FFD700 " : "2px solid black"};
-`;
+})<ComicCardProps>``;
