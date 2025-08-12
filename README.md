@@ -1,5 +1,7 @@
 ### OBSERVAÇÃO
 
+IMPORTANTE: Como não coloquei loading na pagina e subi a aplicação backend no render, a primeira busca irá demorar em média de 10-15 segundos, pelo fato do render entrar em estado de "sleeping" quando não há nenhuma requisição durante 15 minutos.
+
 Ao tentar acessar a API vi que estava fora do ar, retornando status 500, vi em alguns fóruns que várias pessoas estavam passando
 pelo mesmo problema. Com meu comprometimento, decidi fazer um mock simulando a API da marvel. Criei um backend, com um mock de 100 quadrinhos.
 Criei uma API e consumi ela no frontend, utilizando meus conhecimentos em API REST.
