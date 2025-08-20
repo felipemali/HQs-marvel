@@ -25,7 +25,7 @@ const Home = () => {
 
   useEffect(() => {
     fetch(
-      `https://backend-testeapp.onrender.com/api/comics?page=${currentPage}&limit=14&search=${search}`
+      `https://hqs-marvel.onrender.com/api/comics?page=${currentPage}&limit=14&search=${search}`
     )
       .then((res) => res.json())
       .then((data: MarvelComicsAPIResponse<MarvelComicRarity>) => {
