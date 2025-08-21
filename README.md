@@ -12,6 +12,7 @@ Este repositório contém uma aplicação completa de **uma loja de HQs**, compo
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
 ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
@@ -34,7 +35,7 @@ HQs-marvel/
 │ ├── cypress/     # Armazena todos testes E2E
 │ │ ├── src/
 │ │ ├── assets/    # Imagens e icones
-│ │ ├── components # Todos componentes reutilizávei
+│ │ ├── components # Todos componentes reutilizáveis
 │ │ ├── hooks      # Hooks do Redux
 │ │ ├── mock       # Armazena os cupons
 │ │ ├── models     # Todas Tipagens globais
@@ -169,6 +170,8 @@ GET https://hqs-marvel.onrender.com/api/comics?page=1&limit=10&search=Spider
   ]
 }  </pre>
 
+---
+
 ## 🧪 Testes E2E
 
 - O frontend inclui testes E2E com Cypress.
@@ -179,6 +182,30 @@ pnpm cy:open
 
 # Para rodar os testes no terminal
  pnpm cy:run
+```
+
+---
+
+## 🐋 Usando Docker
+
+**Você pode rodar a aplicação de HQs facilmente com Docker.**
+
+- O Dockerfile faz duas coisas:
+
+  1. Constrói a aplicação com Node.js e pnpm.
+
+  2. Servirá a aplicação usando Nginx na porta 80.
+
+### 🚀 Como Rodar
+
+```bash
+# Construir a imagem
+docker build -t hq-app .
+
+# Rodar o container
+docker run -p 8080:80 hq-ap
+
+- A aplicação estará disponível em http://localhost:8080
 ```
 
 ---
