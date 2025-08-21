@@ -112,7 +112,7 @@ cd backend
 ```bash
 # O backend está hospedado no Render e pode ser acessado publicamente pelo link:
 
-https://hqs-marvel.onrender.com
+https://hqs-marvel.onrender.com/api/comics
 
 - O frontend já está configurado para consumir esta URL em produção.
 ```
