@@ -5,6 +5,8 @@ Este repositório contém uma aplicação completa de **uma loja de HQs**, compo
 - **Back-end** → Fornece uma API personalizada que serve dados de um **mock com 100 HQs** previamente definidos.
 - **Front-end** → Consome essa API, listando e exibindo detalhes das HQs.
 
+  ### Link da Loja de HQs: https://h-qs-marvel.vercel.app/
+
 <br>
 <br>
 
