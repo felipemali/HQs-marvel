@@ -1,42 +1,51 @@
 import { useDispatch } from "react-redux";
 import { Form } from "../../components/Form";
-import { useEffect } from "react";
+import { useEffect, useRef, CSSProperties } from "react";
 import { Pagination } from "../../components/Pagination";
 import { useAppSelector } from "../../hooks";
-import { setComics } from "../../redux/store/marvelSlice";
-import {
-  MarvelComicRarity,
-  MarvelComicsAPIResponse,
-} from "../../models/comics";
+import { setComics, setIsLoading } from "../../redux/store/marvelSlice";
+import { useComics } from "../../hooks/fetchComics";
+import { Loading } from "../../components/Loading";
 
 export type setFiltersProps = {
   orderBy: string;
   orientation: string;
 };
 
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
 const Home = () => {
-  const comics = useAppSelector(
-    (state) => state.marvel.comics
-  ) as MarvelComicsAPIResponse<MarvelComicRarity> | null;
+  const dispatch = useDispatch();
+  const hasSynced = useRef(false);
   const search = useAppSelector((state) => state.marvel.search);
   const currentPage = useAppSelector((state) => state.marvel.currentPage);
-
-  const dispatch = useDispatch();
+  const { data, isLoading, error } = useComics(currentPage, search);
 
   useEffect(() => {
-    fetch(
-      `https://hqs-marvel.onrender.com/api/comics?page=${currentPage}&limit=14&search=${search}`
-    )
-      .then((res) => res.json())
-      .then((data: MarvelComicsAPIResponse<MarvelComicRarity>) => {
-        dispatch(setComics(data));
-      });
-  }, [dispatch, currentPage, search]);
+    if (data && !hasSynced.current) {
+      dispatch(setComics(data));
+      dispatch(setIsLoading(isLoading));
+      hasSynced.current = true;
+    }
+  }, [data, dispatch]);
+
+  if (isLoading)
+    return (
+      <>
+        <Loading loading={isLoading} />;
+      </>
+    );
+
+  if (error) return <p>Erro ao carregar HQs...</p>;
 
   return (
     <>
       <Form />
-      <Pagination comics={comics} />
+      <Pagination comics={data} />
     </>
   );
 };

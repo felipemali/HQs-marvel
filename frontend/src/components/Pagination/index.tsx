@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { setCurrentPage } from "../../redux/store/marvelSlice";
 
 type PaginationProps = {
-  comics: MarvelComicsAPIResponse<MarvelComicRarity> | null;
+  comics: MarvelComicsAPIResponse<MarvelComicRarity> | undefined;
 };
 export const Pagination = ({ comics }: PaginationProps) => {
   const currentPage = useAppSelector((state) => state.marvel.currentPage);

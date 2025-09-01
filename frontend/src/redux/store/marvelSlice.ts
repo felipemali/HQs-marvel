@@ -8,11 +8,13 @@ type MarvelState = {
   comics: MarvelComicsAPIResponse | null;
   cart: MarvelComicRarity[];
   search: string | undefined;
+  isLoading: boolean;
   currentPage: number;
 };
 const initialState: MarvelState = {
   comics: null,
   cart: [],
+  isLoading: true,
   search: "",
   currentPage: 1,
 };
@@ -31,6 +33,9 @@ const marvelSliceComics = createSlice({
     },
     setCart(state, action: PayloadAction<MarvelComicRarity[]>) {
       state.cart = action.payload;
+    },
+    setIsLoading(state, action: PayloadAction<boolean>) {
+      state.isLoading = action.payload;
     },
     addToCart(state, action: PayloadAction<MarvelComicRarity>) {
       const exists = state.cart.find((comic) => comic.id === action.payload.id);
@@ -55,6 +60,7 @@ const marvelSliceComics = createSlice({
 export const {
   setComics,
   setSearch,
+  setIsLoading,
   setCurrentPage,
   setCart,
   addToCart,
