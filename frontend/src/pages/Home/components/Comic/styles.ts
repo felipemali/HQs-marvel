@@ -33,7 +33,6 @@ export const ComicCard = styled.div.withConfig({
   display: flex;
   flex-direction: column;
   height: 300px;
-
   box-shadow: ${({ isRare }) => (isRare ? "none" : "4px 4px black")};
   transition: 0.2s linear;
   position: relative;
@@ -48,15 +47,16 @@ export const ComicCard = styled.div.withConfig({
   @media (min-width: 1024px) {
     filter: grayscale(100%);
   }
-  @media (min-width: 551px) and (max-width: 900px) {
-    max-width: 70%;
-  }
-  @media (max-width: 550px) {
-    max-width: 60%;
-  }
 `;
 export const ComicCardContainer = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "isRare",
 })<ComicCardProps>`
   border: ${({ isRare }) => (isRare ? "10px groove #FFD700 " : "none")};
+
+  @media (min-width: 551px) and (max-width: 900px) {
+    max-width: 70%;
+  }
+  @media (max-width: 550px) {
+    max-width: 80%;
+  }
 `;
