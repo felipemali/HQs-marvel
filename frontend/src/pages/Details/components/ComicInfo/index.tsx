@@ -42,7 +42,7 @@ export const ComicInfo = ({ dates, format, prices }: ComicInfoProps) => {
           {prices.length > 0 ? (
             prices.map((price, i) => (
               <PriceItem key={i}>
-                {price.type}: R$ {price.price.toFixed(2)}
+                Preço de capa: R$ {price.price.toFixed(2)}
               </PriceItem>
             ))
           ) : (

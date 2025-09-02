@@ -5,7 +5,7 @@ export const Footer = () => {
     <FooterContainer>
       <FooterContent>
         <FooterText>© 2025 Marvel Comics Store</FooterText>
-        <FooterText>Feito por Felipe Lima - Teste NeoApp</FooterText>
+        <FooterText>Feito por Felipe Lima</FooterText>
       </FooterContent>
     </FooterContainer>
   );
