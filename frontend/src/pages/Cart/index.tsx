@@ -20,6 +20,7 @@ import { Alert } from "../../components/Alert";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { clearCart } from "../../redux/store/marvelSlice";
+import { MarvelComic } from "../../localStorage/type";
 
 export type CartTypeProps = {
   items: CartType[];
@@ -27,13 +28,20 @@ export type CartTypeProps = {
 };
 const Cart = () => {
   const [alert, setAlert] = useState(false);
+  const [cartItems, setCartItems] = useState<MarvelComic[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  const cart = useAppSelector((state) => state.marvel.cart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const total = cart.reduce((acc, comic) => {
+    const stored = localStorage.getItem("cart");
+    if (stored) {
+      setCartItems(JSON.parse(stored));
+    }
+  }, []);
+
+  useEffect(() => {
+    const total = cartItems.reduce((acc, comic) => {
       const sumPrices = comic.prices.reduce(
         (sum, priceObj) => sum + priceObj.price,
         0
@@ -41,7 +49,7 @@ const Cart = () => {
       return acc + sumPrices;
     }, 0);
     setTotalPrice(total);
-  }, [cart]);
+  }, [cartItems]);
 
   const handleBuy = () => {
     setAlert(true);
@@ -63,8 +71,8 @@ const Cart = () => {
         <ShoppingCart size={50} />
       </CartTitle>
       <ItemList>
-        {cart.length > 0 ? (
-          cart.map((item) => (
+        {cartItems.length > 0 ? (
+          cartItems.map((item) => (
             <CartItem data-testid="cart-item" key={item.id}>
               <img src={item.thumbnail.path} alt={item.title} />
 
@@ -83,7 +91,7 @@ const Cart = () => {
           </>
         )}
       </ItemList>
-      {cart.length > 0 && (
+      {cartItems.length > 0 && (
         <CheckoutContainer>
           <InputCoupon />
           <TotalText>Total: {totalPrice.toFixed(2)}</TotalText>
