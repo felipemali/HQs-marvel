@@ -49,6 +49,15 @@ export const InputCoupon = () => {
     }
   };
 
+  const deleteMsgCoupon = () => {
+    setInfoCoupon((prev) => {
+      return {
+        ...prev,
+        message: "",
+      };
+    });
+  };
+
   return (
     <>
       <CouponContainer>
@@ -56,6 +65,7 @@ export const InputCoupon = () => {
           ref={inputRef}
           type="text"
           placeholder="Digite seu cupom"
+          onFocus={deleteMsgCoupon}
         />
         <Button onClick={handleCoupon}>Aplicar</Button>
       </CouponContainer>
