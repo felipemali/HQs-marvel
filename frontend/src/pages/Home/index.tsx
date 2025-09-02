@@ -26,19 +26,16 @@ const Home = () => {
   const { data, isLoading, error } = useComics(currentPage, search);
 
   useEffect(() => {
-    if (data && !hasSynced.current) {
+    if (data) {
       dispatch(setComics(data));
       dispatch(setIsLoading(isLoading));
       hasSynced.current = true;
     }
   }, [data, dispatch]);
 
-  if (isLoading)
-    return (
-      <>
-        <Loading loading={isLoading} />;
-      </>
-    );
+  if (isLoading) {
+    return <Loading loading={isLoading} />;
+  }
 
   if (error) return <p>Erro ao carregar HQs...</p>;
 
