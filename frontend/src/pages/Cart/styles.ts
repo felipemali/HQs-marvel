@@ -15,6 +15,8 @@ export const CartContainer = styled.main`
   }
 `;
 export const MessageCartEmpty = styled.h1`
+  font-family: "Bangers", cursive;
+  font-size: 2.5em;
   display: flex;
   align-items: center;
   display: contents;
