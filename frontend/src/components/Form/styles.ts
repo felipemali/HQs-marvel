@@ -33,3 +33,8 @@ export const Button = styled.button`
     box-shadow: 4px 4px black;
   }
 `;
+export const Error = styled.p`
+  font-family: "Bangers", cursive;
+  color: red;
+  margin: 0 0 1em 0;
+`;
