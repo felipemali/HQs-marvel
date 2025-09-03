@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MarvelComic } from "../models/comicsLocalStorage";
 
 export const useCart = () => {
-  const [cartItems, setCartItems] = useState<MarvelComic[]>([]);
+  const [cartItems, setCartItems] = useState<MarvelComic[] | []>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {

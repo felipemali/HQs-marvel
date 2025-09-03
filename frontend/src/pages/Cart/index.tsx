@@ -19,7 +19,6 @@ import { InputCoupon } from "./components/InputCoupon";
 import { Alert } from "../../components/Alert";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { clearCart } from "../../redux/store/marvelSlice";
 import { useCart } from "../../hooks/useCart";
 
 export type CartTypeProps = {
@@ -28,13 +27,14 @@ export type CartTypeProps = {
 };
 const Cart = () => {
   const [alert, setAlert] = useState(false);
-  const { cartItems, remove, totalPrice } = useCart();
+  const { cartItems, setCartItems, remove, totalPrice } = useCart();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleBuy = () => {
+    setCartItems([]);
+    localStorage.setItem("cart", JSON.stringify([]));
     setAlert(true);
-    dispatch(clearCart());
   };
 
   return (
@@ -71,7 +71,8 @@ const Cart = () => {
           ))
         ) : (
           <>
-            <MessageCartEmpty>Carrinho vazio... </MessageCartEmpty>
+            {!alert && <MessageCartEmpty>Carrinho vazio... </MessageCartEmpty>}
+
             {alert && (
               <Alert type="success">Compra efetuada com sucesso!!</Alert>
             )}
