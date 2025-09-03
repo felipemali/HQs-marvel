@@ -108,4 +108,5 @@ export const TotalText = styled.p`
 export const TrashButton = styled.button`
   border: none;
   background-color: transparent;
+  cursor: pointer;
 `;
