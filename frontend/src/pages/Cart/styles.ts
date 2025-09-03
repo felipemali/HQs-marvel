@@ -66,7 +66,16 @@ export const CartItem = styled.div`
     border: 2px solid black;
     margin-right: 1em;
   }
+  .container-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 0;
 
+    @media (min-width: 500px) {
+      padding-right: 2em;
+    }
+  }
   .info {
     flex: 1;
   }
@@ -95,4 +104,8 @@ export const TotalText = styled.p`
   font-size: 1.8em;
   margin-bottom: 1em;
   color: black;
+`;
+export const TrashButton = styled.button`
+  border: none;
+  background-color: transparent;
 `;

@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import ArrowLeft from "../../assets/img/arrow_left.png";
 import { Button } from "../../components/Button";
@@ -11,16 +11,16 @@ import {
   TotalText,
   MessageCartEmpty,
   Image,
+  TrashButton,
 } from "./styles";
 import { CartType } from "../../models/comics";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Trash2 } from "lucide-react";
 import { InputCoupon } from "./components/InputCoupon";
-import { useAppSelector } from "../../hooks";
 import { Alert } from "../../components/Alert";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { clearCart } from "../../redux/store/marvelSlice";
-import { MarvelComic } from "../../localStorage/type";
+import { useCart } from "../../hooks/useCart";
 
 export type CartTypeProps = {
   items: CartType[];
@@ -28,34 +28,15 @@ export type CartTypeProps = {
 };
 const Cart = () => {
   const [alert, setAlert] = useState(false);
-  const [cartItems, setCartItems] = useState<MarvelComic[]>([]);
-  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const { cartItems, remove, totalPrice } = useCart();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const stored = localStorage.getItem("cart");
-    if (stored) {
-      setCartItems(JSON.parse(stored));
-    }
-  }, []);
-
-  useEffect(() => {
-    const total = cartItems.reduce((acc, comic) => {
-      const sumPrices = comic.prices.reduce(
-        (sum, priceObj) => sum + priceObj.price,
-        0
-      );
-      return acc + sumPrices;
-    }, 0);
-    setTotalPrice(total);
-  }, [cartItems]);
-
   const handleBuy = () => {
     setAlert(true);
-
     dispatch(clearCart());
   };
+
   return (
     <CartContainer>
       <Image
@@ -75,10 +56,16 @@ const Cart = () => {
           cartItems.map((item) => (
             <CartItem data-testid="cart-item" key={item.id}>
               <img src={item.thumbnail.path} alt={item.title} />
-
-              <div className="info">
-                <div className="title">{item.title}</div>
-                <div className="price">R$ {item.prices[0].price}</div>
+              <div className="container-info">
+                <div className="info">
+                  <div className="title">{item.title}</div>
+                  <div className="price">R$ {item.prices[0].price}</div>
+                </div>
+                <div>
+                  <TrashButton onClick={() => remove(item.id)}>
+                    <Trash2 />
+                  </TrashButton>
+                </div>
               </div>
             </CartItem>
           ))
