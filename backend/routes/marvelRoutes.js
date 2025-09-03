@@ -1,5 +1,5 @@
-const express = require("express");
-const getComics = require("../controllers/marvelController");
+import express from "express";
+import getComics from "../controllers/marvelController";
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-const marvelComicsMock = require("../mock/marvelComicsMock.js");
+import marvelComicsMock from "../mock/marvelComicsMock";
 const getComics = (req, res) => {
   const comics = marvelComicsMock.data.results;
 
