@@ -11,27 +11,29 @@ import {
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { MarvelComicRarity } from "../../../../models/comics";
-import { useAppSelector } from "../../../../hooks";
 import { Alert } from "../../../../components/Alert";
 import { useState } from "react";
 import { ComicInfo } from "../ComicInfo";
-import { getCartFromLocalStorage } from "../../../../localStorage/getCartLocalStorage";
-import { saveCartToLocalStorage } from "../../../../localStorage/saveCartLocalStorage";
+import { useCart } from "../../../../hooks/useCart";
 
 type ComicDetailProps = {
   comic: MarvelComicRarity;
 };
 export const ComicDetail = ({ comic }: ComicDetailProps) => {
   const [alert, setAlert] = useState(false);
-  const cart = useAppSelector((state) => state.marvel.cart);
-
+  const { cartItems, add } = useCart();
   const navigate = useNavigate();
 
   const handleClick = (comic: MarvelComicRarity) => {
-    const verifiquedCart = cart.find((item) => item.id === comic.id);
+    const verifiquedCart = cartItems.find((item) => item.id === comic.id);
     if (!verifiquedCart) {
-      const currentCart = getCartFromLocalStorage();
-      saveCartToLocalStorage([...currentCart, comic]);
+      const resumeComic = {
+        id: comic.id,
+        title: comic.title,
+        prices: comic.prices,
+        thumbnail: comic.thumbnail,
+      };
+      add(resumeComic);
       navigate(`/carrinho`);
     } else {
       setAlert(true);
