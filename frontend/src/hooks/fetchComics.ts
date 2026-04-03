@@ -4,12 +4,14 @@ type ComicsResponse = MarvelComicsAPIResponse<MarvelComicRarity>;
 
 const fetchComics = async (
   page: number,
-  search: string | undefined
+  search: string | undefined,
 ): Promise<ComicsResponse> => {
   const res = await fetch(
-    `https://hqs-marvel.onrender.com/api/comics?page=${page}&limit=14&search=${search}`
+    // `https://hqs-marvel.onrender.com/api/comics?page=${page}&limit=14&search=${search}`,
+    `http://localhost:3001/api/comics?page=${page}&limit=14&search=${search}`,
   );
   if (!res.ok) throw new Error("Erro ao buscar HQs");
+
   return res.json();
 };
 

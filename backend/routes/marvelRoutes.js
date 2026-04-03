@@ -1,5 +1,5 @@
 import express from "express";
-import getComics from "../controllers/marvelController";
+import getComics from "../controllers/marvelController.js";
 
 const router = express.Router();
 
@@ -8,4 +8,4 @@ router.get("/ping", (req, res) => {
   res.status(200).send("ping");
 });
 
-module.exports = router;
+export default router;

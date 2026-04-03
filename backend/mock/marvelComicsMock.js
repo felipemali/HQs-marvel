@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   code: 200,
   status: "Ok",
   copyright: "\u00a9 2025 MARVEL",

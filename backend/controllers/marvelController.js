@@ -1,4 +1,5 @@
-import marvelComicsMock from "../mock/marvelComicsMock";
+import marvelComicsMock from "../mock/marvelComicsMock.js";
+
 const getComics = (req, res) => {
   const comics = marvelComicsMock.data.results;
 
@@ -9,7 +10,7 @@ const getComics = (req, res) => {
   let filteredComics = comics;
   if (search) {
     filteredComics = comics.filter((comic) =>
-      comic.title.toLowerCase().includes(search)
+      comic.title.toLowerCase().includes(search),
     );
   }
 
@@ -42,4 +43,4 @@ const getComics = (req, res) => {
   });
 };
 
-module.exports = getComics;
+export default getComics;

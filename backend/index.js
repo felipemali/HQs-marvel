@@ -1,4 +1,4 @@
-import marvelRoutes from "./routes/marvelRoutes";
+import marvelRoutes from "./routes/marvelRoutes.js";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
